@@ -1,0 +1,60 @@
+{% extends 'flatpages/default.html' %}
+
+{% block title %}
+{{ flatpage.title }}
+{% endblock title %}
+
+{% block content %}
+    <h2>{{ flatpage.title }}</h2>
+    <hr>
+    <div class="container">
+        <div class="d-flex flex-items-xxs-center flex-column">
+            <h2 class="text-normal text-34 text-center text-black about-location-heading">
+                <p>Our <strong><span class="text-blue">Contacts</span></strong></p>
+            </h2>
+            <p>{{ flatpage.content }}</p>
+            <p>&nbsp</p>
+            <h2 class="text-normal text-34 text-center text-black about-location-heading">
+                <p>Our <strong><span class="text-blue">Locations</span></strong></p>
+            </h2>
+            <div class="d-flex flex-items-xxs-center flex-items-lg-left flex-column flex-md-row p-a-0">
+                <div class="col-12 col-md-6 d-flex align-items-center align-items-md-end flex-column">
+                    <div
+                        class="d-flex flex-items-xxs-center align-items-center align-items-md-end flex-column flex-md-row text-black">
+                        <div class="hq-image mr-0 mr-md-sm"><img alt="our locations building icon" class="img-fluid"
+                                src="https://d1nuzn6tpp7gri.cloudfront.net/public/pictures/W1siZiIsIjIwMTkvMTIvMjAvMTMvMDQvMzIvYTdlZjRiZmItMGZlNS00NzI5LWJlNDEtZmM1MjIxYzJkYzYxL2hxLWJ1aWxkaW5nQDJ4LnBuZyJdXQ/036793073aef6198/hq-building%402x.png?name=hq-building%402x">
+                        </div>
+                        <div class="d-flex flex-column">
+                            <h3 class="text-normal text-20">
+                                <p>HQ Boston</p>
+                            </h3>
+                            <h3 class="text-normal text-16 text-quiet">
+                                <p>850 Summer Street, Boston, MA 02127</p>
+                                <p>855-APPTOPIA</p>
+                                <p>855.277.8674</p>
+                            </h3>
+                        </div>
+                        <div class="mb-md hidden-md-up"></div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 d-flex flex-items-xxs-center flex-column justify-content-end">
+                    <div id="about_location_174" class="about_location">
+                        <div class="d-flex flex-items-xxs-center flex-items-lg-left flex-row">
+                            <div class="img-box mr-sm"><img alt="our locations pin icon" class="img-fluid m-x-auto m-b"
+                                    src="https://d1nuzn6tpp7gri.cloudfront.net/public/pictures/W1siZiIsIjIwMTkvMTIvMjAvMTMvMDQvMzIvNmExOGEyZmQtNjE5NS00MTdmLTkyNmMtYjVkNGYyOTcwMjJjL2xvY2F0aW9uLXBpbkAyeC5wbmciXV0/ab0f4c7499cf96c4/location-pin%402x.png?name=location-pin%402x">
+                            </div>
+                            <div class="d-flex flex-column justify-content-end text-box">
+                                <h3 class="text-20 text-normal">
+                                    <p>Ukraine</p>
+                                </h3>
+                                <h3 class="text-16 text-normal text-quiet">
+                                    <p>Tolstoho Lva 3, Kyiv Ukraine 01032</p>
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

@@ -1,0 +1,33 @@
+{% extends 'flatpages/default.html' %}
+
+{% block title %}
+{{ flatpage.title }}
+{% endblock title %}
+
+{% block content %}
+    <h2>{{ flatpage.title }}</h2>
+    <hr>
+    <p>{{ flatpage.content }}</p>
+    <p>&nbsp;</p>
+    <table style="width: 100%">
+        <tbody>
+            <tr>
+                <td style="width: 83px;"><img src="https://ckeditor.com/assets/images/home/home-icon-head-3c937c7a34.svg"
+                        alt="" width="65" height="77" /></td>
+                <td style="width: 628.75px;">The&nbsp;&nbsp;<strong>num</strong><strong>ber of StackOverflow</strong>
+                    questions <em>related to CKEditor.</em> <span style="text-decoration: underline;">You are in good
+                        company!</span> If it happens that you cannot find an answer in&nbsp;the documentation, <span
+                        style="color: #ff9900;">there is a huge chance that you will find it already on
+                        StackOverflow</span>. <span style="background-color: #99cc00;">Oh, and we are active there, too
+                        :)</span></td>
+            </tr>
+        </tbody>
+    </table>
+    <p>&nbsp;</p>
+    <hr />
+    <h2>Different text formats:</h2>
+    <blockquote>
+        <p>Quotes example text</p>
+    </blockquote>
+    <p style="font-family:verdana">This is a paragraph with verdana font.</p>
+{% endblock content %}
