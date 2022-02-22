@@ -1,17 +1,8 @@
 {% extends 'flatpages/default.html' %}
 
-<!-- не забываем заранее загружать наши фильтры! -->
-<!--{% load custom_filters %}-->
-
 {% block title %} Product list {% endblock title %}
 
 {% block content %}
-
-<!-- Перед таблицей добавим форму для поиска -->
-<form method="GET">
-    {{ filter.form }} <!-- Форму от фильтров за нас сделает django. А вот кнопку, увы придётся делать самому -->
-    <input type="submit" value="Найти">
-</form>
 
 <table>
     <thead>
@@ -28,10 +19,16 @@
             Quantity
         </th>
     </thead>
+    <!-- поменяем products на filter.qs, т.к. теперь мы забираем уже отобранную по каким-то параметрам информацию -->
     {% for product in filter.qs %}
     <tr>
         <td>
-            {{ product.name|title }}
+            <!-- При нажатии на имя товара в таблице нас теперь будет перекидывать на страницу с самого товара -->
+            <a href="{% url 'product_detail' product.id %}">{{ product.name|title }}</a>
+            <!-- добавим ссылку на редактирование товара-->
+            <a href="{% url 'product_update' product.id %}"><u>Редактировать</u></a>
+            <!-- добавим ссылку на удаление товара-->
+            <a href="{% url 'product_delete' product.id %}"><u> Удалить </u></a>
         </td>
         <td>
             {{ product.category.name|title }}
@@ -46,16 +43,15 @@
     {% endfor %}
 </table>
 
-<!-- Проверяем что поддерживается постраничный вывод -->
+<a href="{% url 'product_create' %}">Добавить новый товар</a> <br>
+
 {% if is_paginated %}
 
-    <!-- Если доступна предыдущая страница, то даём ссылку на неё и самую первую страницу -->
     {% if page_obj.has_previous %}
         <a href="?page=1">First</a>
         <a href="?page={{ page_obj.previous_page_number }}"><<<</a>
     {% endif %}
 
-    <!-- Показываем только текущую страницу и ближайшие к ней, чтобы список не тянулся и не захламлял страницу -->
     {% for num in page_obj.paginator.page_range %}
         {% if page_obj.number == num %}
             <a>{{ num }}</a>
@@ -64,18 +60,12 @@
         {% endif %}
     {% endfor %}
 
-    <!-- Если есть следующая страница, то даём ссылку на неё и на самую последнюю страницу -->
     {% if page_obj.has_next %}
         <a href="?page={{ page_obj.next_page_number }}">>>></a>
         <a href="?page={{ page_obj.paginator.num_pages }}">Last</a>
     {% endif %}
 
 {% endif %}
-
-<form method="POST">
-    {% csrf_token %}
-    {{ form }} <!-- Теперь нам нужна только готовая форма и кнопка -->
-    <input type="submit" value="Добавить товар">
-</form>
+<br>
 
 {% endblock content %}
