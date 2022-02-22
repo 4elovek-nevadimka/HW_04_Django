@@ -45,6 +45,7 @@
     </tr>
     {% endfor %}
 </table>
+
 <!-- Проверяем что поддерживается постраничный вывод -->
 {% if is_paginated %}
 
@@ -70,4 +71,11 @@
     {% endif %}
 
 {% endif %}
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form }} <!-- Теперь нам нужна только готовая форма и кнопка -->
+    <input type="submit" value="Добавить товар">
+</form>
+
 {% endblock content %}

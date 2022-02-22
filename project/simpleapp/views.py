@@ -3,27 +3,39 @@ from datetime import datetime
 from django.views.generic import ListView, DetailView
 
 from .filters import ProductFilter
-from .models import Product
+from .forms import ProductForm
+from .models import Product, Category
 
 
 class ProductList(ListView):
-    # указываем модель, объекты которой мы будем выводить
     model = Product
-    # указываем имя шаблона, в котором будет лежать HTML, в котором будут все инструкции о том, как именно пользователю должны вывестись наши объекты
     template_name = 'products.html'
-    # это имя списка, в котором будут лежать все объекты, его надо указать, чтобы обратиться к самому списку объектов через HTML-шаблон
     context_object_name = 'products'
 
     ordering = ['-price']
-    paginate_by = 1  # поставим постраничный вывод в один элемент
+    # поставим постраничный вывод в один элемент
+    paginate_by = 1
+    # добавляем форм класс, чтобы получать доступ к форме через метод POST
+    form_class = ProductForm
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['filter'] = ProductFilter(self.request.GET, queryset=self.get_queryset())
 
-        context['time_now'] = datetime.utcnow()  # добавим переменную текущей даты time_now
-        context['value1'] = None  # добавим ещё одну пустую переменную, чтобы на её примере посмотреть работу другого фильтра
+        context['categories'] = Category.objects.all()
+        context['form'] = ProductForm()
         return context
+
+    def post(self, request, *args, **kwargs):
+        # создаём новую форму, забиваем в неё данные из POST-запроса
+        form = self.form_class(request.POST)
+
+        # если пользователь ввёл всё правильно и нигде не ошибся, то сохраняем новый товар
+        if form.is_valid():
+            form.save()
+
+        # отправляем пользователя обратно на GET-запрос.
+        return super().get(request, *args, **kwargs)
 
 
 class ProductDetail(DetailView):
