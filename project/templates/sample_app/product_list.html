@@ -1,4 +1,4 @@
-{% extends 'flatpages/default.html' %}
+{% extends 'sample_app/default.html' %}
 
 {% block title %} Product list {% endblock title %}
 
@@ -25,10 +25,6 @@
         <td>
             <!-- При нажатии на имя товара в таблице нас теперь будет перекидывать на страницу с самого товара -->
             <a href="{% url 'product_detail' product.id %}">{{ product.name|title }}</a>
-            <!-- добавим ссылку на редактирование товара-->
-            <a href="{% url 'product_update' product.id %}"><u>Редактировать</u></a>
-            <!-- добавим ссылку на удаление товара-->
-            <a href="{% url 'product_delete' product.id %}"><u> Удалить </u></a>
         </td>
         <td>
             {{ product.category.name|title }}
@@ -38,6 +34,14 @@
         </td>
         <td>
             {{ product.quantity }}
+        </td>
+        <td>
+            <!-- добавим ссылку на редактирование товара-->
+            <a href="{% url 'product_update' product.id %}"><u>Редактировать</u></a>
+        </td>
+        <td>
+            <!-- добавим ссылку на удаление товара-->
+            <a href="{% url 'product_delete' product.id %}"><u> Удалить </u></a>
         </td>
     </tr>
     {% endfor %}

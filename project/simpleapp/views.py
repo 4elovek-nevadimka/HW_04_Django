@@ -7,7 +7,7 @@ from .models import Product, Category
 
 class ProductList(ListView):
     model = Product
-    template_name = 'products.html'
+    template_name = 'sample_app/product_list.html'
     context_object_name = 'products'
 
     ordering = ['-price']
